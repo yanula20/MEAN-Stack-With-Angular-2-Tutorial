@@ -1,0 +1,49 @@
+{
+  "name": "mean-ang2",
+  "version": "1.0.0",
+  "description": "MEAN Stack with Angular 2",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "build": "cd client && ng build --prod --env=prod",
+    "dev": "echo 'run dev' & npm start",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "nodemon": "./node_modules/nodemon/bin/nodemon.js --config nodemon.json --exec npm run dev "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gugui3z24/MEAN-Stack-With-Angular-2-Tutorial.git"
+  },
+  "keywords": [
+    "MEAN",
+    "Stack",
+    "Angular",
+    "2",
+    "Application"
+  ],
+  "author": "David Acosta",
+  "license": "ISC",
+  "devDependencies": {
+    "@angular/cli": "^1.4.8",
+    "@angular/compiler": "^4.4.6",
+    "@angular/compiler-cli": "^4.4.6",
+    "nodemon": "^1.10.2",
+    "rxjs": "^5.5.2",
+    "typescript": "^2.5.3"
+  },
+  "bugs": {
+    "url": "https://github.com/gugui3z24/MEAN-Stack-With-Angular-2-Tutorial/issues"
+  },
+  "homepage": "https://github.com/gugui3z24/MEAN-Stack-With-Angular-2-Tutorial#readme",
+  "dependencies": {
+    "@angular-devkit/schematics": "0.0.34",
+    "@angular/core": "^4.4.6",
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.3",
+    "express": "^4.16.2",
+    "express-method-override": "0.0.3",
+    "jsonwebtoken": "^7.4.1",
+    "mongoose": "^4.13.3"
+  }
+}

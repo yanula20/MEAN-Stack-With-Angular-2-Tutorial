@@ -22,13 +22,23 @@
 **/node_modules
 
 #vagrant files
-*/.vagrant/machines/web01/virtualbox
+**/.vagrant/machines/web01/virtualbox
+**/vagrant
 
 #DS_Store
 *.DS_Store
 
 #apple file
 *.com.apple.timemac.com.apple.timemachine.supported
+
+#angular files
+**/angular
+
+#tar.gz files
+*.tar.gz
+
+#virtualbox
+**/virtualbox
 
 # Compiled source #
 ###################

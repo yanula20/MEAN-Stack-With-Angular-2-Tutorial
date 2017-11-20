@@ -11,7 +11,7 @@
     owner: vagrant
     mode: 0744
 
-- name: Install the STABLE nodejs6 npm 
+- name: Install the STABLE nodejs npm 
   become: yes
   shell: /vagrant/provisioning/nodejsnpm.sh
 

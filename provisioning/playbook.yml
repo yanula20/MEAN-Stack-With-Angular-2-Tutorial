@@ -6,7 +6,6 @@
   become: yes 
   roles:
     - {name: ansiblerepo, tags: "ansiblerepo"}
-    - {name: git, tags: "git"}
     - {name: general, tags: "general"}
     - {name: errors, tags: "errors"}
     - {name: mongodb, tags: "mongodb"}

@@ -26,13 +26,13 @@
 
 - name: Running npm install Dependencies
   become: yes
-  shell: "npm install -g npm-install-peers --save"
+  shell: "npm install -g -y npm-install-peers --save"
   args:
     chdir: /vagrant
 
 
 - name: Running npm install Dev Dependencies
   become: yes
-  shell: "npm install -g npm-install-peers --save-dev"
+  shell: "npm install -g -y npm-install-peers --save-dev"
   args:
     chdir: /vagrant

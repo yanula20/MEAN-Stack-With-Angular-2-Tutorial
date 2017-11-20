@@ -1,0 +1,12 @@
+---
+
+- name: Update apt cache
+  apt: update_cache=yes
+
+- name: Intstalling Mongodb
+  shell: /vagrant/provisioning/mongodb.sh
+
+- name: Sarting MongoDB service
+  service:
+    name: mongod
+    state: started

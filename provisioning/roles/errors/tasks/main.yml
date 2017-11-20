@@ -1,0 +1,14 @@
+---
+# -D uninstalls dev dependencies
+# ; run each command vs && 1st must run for 2nd cmd to run
+
+- name: Eror msg Corrections | Make directory tree readable
+  file: 
+    path: /vagrant/node_modules
+    mode: 0755
+    recurse: yes
+
+- name: Error msg Corrections | Broken apt-get
+  become: yes
+  shell: sh -c "apt-get update -y; apt-get dist- -y; apt-get autoremove -y; apt-get autoclean -y"
+  

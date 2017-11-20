@@ -1,0 +1,47 @@
+---
+
+- name: Update apt cache
+  apt: update_cache=yes
+
+- name: Changing ownership of /usr/local/bin files
+  become: yes
+  file:
+    path: /usr/local/bin/
+    owner: vagrant
+    mode: 0744
+    recurse: yes
+
+- name: Changing ownership of /usr/local/lib/node_module files
+  become: yes
+  file:
+    path: /usr/local/lib/node_modules/
+    owner: vagrant
+    mode: 0744
+    recurse: yes
+
+- name: Changing ownership of /usr/local/sharefiles
+  become: yes
+  file:
+    path: /usr/local/share/
+    owner: vagrant
+    mode: 0744
+    recurse: yes
+
+- name: Installing dpkg
+  become: yes
+  apt: name=dpkg state=present
+
+- name: Installing Software Properties Common for Ansible
+  become: yes
+  apt: name=software-properties-common state=present
+
+- name: Installing ansible
+  become: yes
+  apt: name=ansible state=present
+
+- name: Installing Build-Essential
+  become: yes
+  apt: name=build-essential state=present
+
+  
+

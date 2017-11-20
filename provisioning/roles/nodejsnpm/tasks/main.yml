@@ -1,0 +1,22 @@
+---
+#https://github.com/nodesource/distributions#debmanual
+#npm Supported releases of Node.js are the 
+#latest release of 4, 6, 7, 8
+#npm npm does not support Node.js v9.2.0
+
+- name: Change ownernship STABLE of nodejs and npm script
+  become: yes
+  file: 
+    path: /vagrant/provisioning/nodejsnpm.sh
+    owner: vagrant
+    mode: 0744
+
+- name: Install the STABLE nodejs6 npm 
+  become: yes
+  shell: /vagrant/provisioning/nodejsnpm.sh
+
+
+
+
+ 
+

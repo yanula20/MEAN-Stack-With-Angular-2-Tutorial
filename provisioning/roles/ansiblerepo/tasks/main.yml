@@ -1,0 +1,9 @@
+---
+
+- name: Update apt cache
+  become: yes
+  apt: update_cache=yes
+
+- name: Ansible repo
+  become: yes
+  shell: /vagrant/provisioning/ansiblerepo.sh

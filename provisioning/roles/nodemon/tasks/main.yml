@@ -1,0 +1,14 @@
+---
+
+- name: Change ownership on nodemon.sh
+  file: 
+    path: /vagrant/provisioning/nodemon.sh
+    owner: vagrant
+    mode: 0744
+
+- name: run nodemon script
+  become: yes
+  shell: /vagrant/provisioning/nodemon.sh
+  
+
+

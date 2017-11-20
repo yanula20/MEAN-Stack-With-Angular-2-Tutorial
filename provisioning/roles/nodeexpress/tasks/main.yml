@@ -1,0 +1,8 @@
+---
+
+- name: Update apt cache
+  apt: update_cache=yes
+
+- name: Installing Node-Express
+  shell: /vagrant/provisioning/nodeexpress.sh
+  

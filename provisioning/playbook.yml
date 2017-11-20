@@ -1,0 +1,20 @@
+---
+#hosts: points to hosts.yml file
+
+- name: web01 
+  hosts: web01
+  become: yes 
+  roles:
+    - {name: ansiblerepo, tags: "ansiblerepo"}
+    - {name: git, tags: "git"}
+    - {name: general, tags: "general"}
+    - {name: errors, tags: "errors"}
+    - {name: mongodb, tags: "mongodb"}
+    - {name: nodejsnpm, tags: "nodejsnpm"}
+    - {name: npminstall, tags: "npminstall"}
+    - {name: nodeexpress, tags: "nodeexpress"}   
+    - {name: angular2, tags: "angular2"}
+    - {name: nodemon, tags: "nodemon"}
+    - {name: curl, tags: "curl"}
+    - {name: webmin, tags: "webmin"}
+    

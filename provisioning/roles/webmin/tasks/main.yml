@@ -1,0 +1,32 @@
+---
+## apt_repository adds specified repository to the /etc/apt/sources.list
+
+
+- name: Add Webmin repositories
+  apt_repository: >  
+    repo='{{ item }}'
+    state=present
+  with_items:
+  - 'deb http://download.webmin.com/download/repository sarge contrib'
+  - 'deb http://webmin.mirror.somersettechsolutions.co.uk/repository sarge contrib'
+
+- name: Add Webmin key
+  apt_key: >
+   url='http://www.webmin.com/jcameron-key.asc'
+   state=present
+
+- name: Error msg Corrections | Broken apt-get
+  become: yes
+  shell: sh -c "apt-get update;apt-get dist-upgrade;apt-get autoremove;apt-get autoclean"
+  
+
+- name: Install Webmin and prerequisites
+  file:
+    path: /vagrant/provisioning/webdep.sh
+    owner: vagrant
+    mode: 0744
+
+- name: Install Webmin and prerequisites
+  shell: /vagrant/provisioning/webdep.sh
+  args:
+    chdir: /vagrant

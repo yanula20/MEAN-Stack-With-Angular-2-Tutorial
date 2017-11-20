@@ -1,0 +1,8 @@
+---
+
+- name: Installing Angular2
+  become: yes
+  file: 
+    path: /vagrant/provisioning/angular.sh
+    owner: vagrant
+    mode: 0744

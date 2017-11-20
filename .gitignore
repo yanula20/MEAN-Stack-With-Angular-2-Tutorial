@@ -9,14 +9,6 @@
 # ignore all logs
 *.log
 
-# ignore all ansible folders
-**/provisioning
-
-# ignore all ansible folders
-**/ansible
-
-# ignore all .yml files
-*.yml
 
 # ignore all node modules
 **/node_modules

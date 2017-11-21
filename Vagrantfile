@@ -23,7 +23,6 @@ Vagrant.configure(2) do |config|
             sudo apt-get install ansible@latest -y
             sudo apt-get update -y
             sudo yes | apt-get install -f
-            sudo yes | apt-get install git 
         SHELL
     end    
 end

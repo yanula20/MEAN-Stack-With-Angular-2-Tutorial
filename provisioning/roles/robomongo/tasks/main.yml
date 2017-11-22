@@ -1,0 +1,101 @@
+---
+
+
+- name: Does robomongo tar file exist?
+  stat:
+    path: /opt/robo3t-1.1.1-linux-x86_64-c93c6b0.tar.gz
+  register: roboexist_result
+
+- name: Download robomongo to opt
+  become: yes
+  get_url:
+    url: https://download.robomongo.org/1.1.1/linux/robo3t-1.1.1-linux-x86_64-c93c6b0.tar.gz
+    dest: /opt
+  when: roboexist_result.stat.exists == False  
+  
+- name: Does robomongo dir exist?
+  stat:
+    path: /opt/robomongo
+  register: robodir_result
+ 
+- name: Creating robomongo dir
+  become: yes
+  file: 
+    path: /opt/robomongo
+    state: directory
+  when: robodir_result.stat.exists == False
+
+- name: Has robomongo been untarred?
+  stat:
+    path: /opt/robomongo/robo3t-1.1.1-linux-x86_64-c93c6b0  
+  register: robountarred_result
+
+- name: Untar robomongo in opt
+  become: yes
+  unarchive:
+    src: /opt/robo3t-1.1.1-linux-x86_64-c93c6b0.tar.gz
+    dest: /opt/robomongo
+  when: robountarred_result.stat.exists == False
+
+- name: Does symlink exist?
+  stat: path=/opt/robomongo/robo3t-1.1.1-linux-x86_64-c93c6b0/bin/robo3t
+  register: robolink_result
+
+- name: Create robomongo symlink
+  become: yes
+  file: 
+    src: /usr/local/bin/robo3t
+    dest: /opt/robomongo/robo3t-1.1.1-linux-x86_64-c93c6b0/bin/robo3t 
+    state: link
+  when: robolink_result.stat.islnk is not defined
+
+- name: Create robomongo symlink
+  become: yes
+  file: 
+    src: /usr/local/bin/robo3t
+    dest: /usr/lib/x86_64-linux-gnu/qt5/plugins/platforms/ 
+    state: link
+  when: robolink_result.stat.islnk is not defined
+
+- name: xcb
+  apt: name=xcb state=present update_cache=yes 
+
+- name: libx11-xcb1
+  apt: name=libx11-xcb1 state=present update_cache=yes
+
+
+- name: Is xcb in robomongo lib dir?
+  stat: 
+    path: /opt/robomongo/robo3t-1.1.1-linux-x86_64-c93c6b0/lib/xcb
+  register: xcblibrary_result
+
+-  name: Copy xcb from usr-bin to robomongo lib dir
+   copy:
+     src: /usr/bin/xcb
+     dest: /opt/robomongo/robo3t-1.1.1-linux-x86_64-c93c6b0/lib/xcb
+   when:  xcblibrary_result.stat.exists == False
+
+- name: Is xcb linked to robo3t?
+  stat: 
+    path: /opt/robomongo/robo3t-1.1.1-linux-x86_64-c93c6b0/lib/xcb
+  register: xcblink_result
+
+- name: Create xcb and robo3t symlink
+  become: yes
+  file: 
+    src: /usr/local/bin/robo3t
+    dest: /opt/robomongo/robo3t-1.1.1-linux-x86_64-c93c6b0/lib/xcb
+    state: link
+  when: xcblink_result.stat.islnk is not defined
+
+- name: Chown xcb to vagrant in opt...lib/xcb
+  become: yes
+  file: 
+    path: /opt/robomongo/robo3t-1.1.1-linux-x86_64-c93c6b0/lib/xcb
+    owner: vagrant
+    mode: 0777
+
+
+
+  
+ 

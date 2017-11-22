@@ -7,12 +7,14 @@
   roles:
     - {name: ansiblerepo, tags: "ansiblerepo"}
     - {name: general, tags: "general"}
+    #- {name: robomongo, tags: "robomongo"}
     - {name: errors, tags: "errors"}
     - {name: mongodb, tags: "mongodb"}
     - {name: nodejsnpm, tags: "nodejsnpm"}
     - {name: npminstall, tags: "npminstall"}
     - {name: nodeexpress, tags: "nodeexpress"}   
     - {name: angular2, tags: "angular2"}
+    #- {name: angular, tags: "angular"}
     - {name: nodemon, tags: "nodemon"}
     - {name: curl, tags: "curl"}
     - {name: webmin, tags: "webmin"}

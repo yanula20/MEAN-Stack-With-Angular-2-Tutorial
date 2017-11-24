@@ -7,7 +7,7 @@ var path = require('path');
 var authentication = require('./routes/authentication')(router);
 var bodyParser = require('body-parser');
 
-//mongoose.Promise = global.Promise;
+mongoose.Promise = global.Promise;
 
 mongoose.connect(config.uri, 
 
@@ -18,8 +18,8 @@ mongoose.connect(config.uri,
 	if (err) {
 
  		console.log('Could not connect to database: ', err);
-	}else {
-		
+	} else {
+
 		console.log('Connected to database: ' + config.db);
 
 	}
@@ -28,10 +28,10 @@ mongoose.connect(config.uri,
 //middleware
 
 // parse application/x-www-form-urlencoded - above express!
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json - above express!
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 app.use(express.static(__dirname + '/client/dist/'));
 

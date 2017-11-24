@@ -1,38 +1,57 @@
 ---
 
+- name: dependency check
+  become: yes
+  shell: "npm install dependency-check --save"
+  args:
+    chdir: /vagrant
+
+- name: dev dependency check
+  become: yes
+  shell: "npm install dependency-check --save-dev"
+  args:
+    chdir: /vagrant
+
+
+- name: Running npm install peer Dependencies
+  become: yes
+  shell: "npm install npm-install-peers  --save"
+  args:
+    chdir: /vagrant
+
+
+- name: Running npm install peer Dev Dependencies
+  become: yes
+  shell: "npm install npm-install-peers --save-exact --save-dev"
+  args:
+    chdir: /vagrant
+
 - name: Running npm install Dependencies
   become: yes
-  shell: "npm install {{item}}@latest --save"
+  shell: "npm install {{item}}@latest --save-exact --save"
   with_items:
   - mongoose
   - body-parser
   - express-method-override
   - express
+  - bcrypt-nodejs
   args:
     chdir: /vagrant
 
 - name: Running npm install Dev Dependencies
   become: yes
-  shell: "npm install -g npm-install-peers --save-dev"
+  shell: "npm install npm-install-peers --save-dev"
   with_items:
   - \@angular/cli@^1.5.2
   - \@angular/compiler@^4.4.6
   - \@angular/compiler-cli@^4.4.6
+  - \@angular/core@4.4.6
   - rxjs@^5.5.2
   - typescript@^2.5.3
   args:
     chdir: /vagrant
 
 
-- name: Running npm install Dependencies
-  become: yes
-  shell: "npm install -g -y npm-install-peers --save"
-  args:
-    chdir: /vagrant
 
 
-- name: Running npm install Dev Dependencies
-  become: yes
-  shell: "npm install -g -y npm-install-peers --save-dev"
-  args:
-    chdir: /vagrant
+

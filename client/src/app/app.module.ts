@@ -12,18 +12,18 @@ import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    NavbarComponent,
-    HomeComponent,
-    DashboardComponent,
-    RegisterComponent
-  ],
-  imports: [
-    BrowserModule,
-    HttpModule,
-    AppRoutingModule,
-    ReactiveFormsModule
-  ],
+  AppComponent,
+  NavbarComponent,
+  HomeComponent,
+  DashboardComponent,
+  RegisterComponent
+],
+imports: [
+  BrowserModule,
+  HttpModule,
+  AppRoutingModule,
+  ReactiveFormsModule
+],
   providers: [],
   bootstrap: [AppComponent]
 })

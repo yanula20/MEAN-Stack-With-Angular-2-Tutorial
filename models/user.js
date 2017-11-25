@@ -6,29 +6,29 @@ SALT_WORK_FACTOR = 10;
 
 
 var emailLengthChecker = function (email) {
-  // Check if e-mail exists
-  if (!email) {
-    return false; // Return error
-  } else {
+    // Check if e-mail exists
+    if (!email) {
+        return false; // Return error
+    } else {
     // Check the length of e-mail string
     if (email.length < 5 || email.length > 30) {
-      return false; // Return error if not within proper length
+        return false; // Return error if not within proper length
     } else {
-      return true; // Return as valid e-mail
+        return true; // Return as valid e-mail
     }
   }
 };
 
 // Validate Function to check if valid e-mail format
 var validEmailChecker = function (email) {
-  // Check if e-mail exists
-  if (!email) {
-    return false; // Return error
-  } else {
+    // Check if e-mail exists
+    if (!email) {
+        return false; // Return error
+    } else {
     // Regular expression to test for a valid e-mail
-    var regExp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-    return regExp.test(email); // Return regular expression test results (true or false)
-  }
+        var regExp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+        return regExp.test(email); // Return regular expression test results (true or false)
+    }
 };
 
 // Array of Email Validators
@@ -114,9 +114,9 @@ var passwordValidators = [
 ];
 
 var userSchema = new Schema({
-  email: { type: String, required: true, unique: true, lowercase: true, validate: emailValidators },
-  username: { type: String, required: true, unique: true, lowercase: true, validate: usernameValidators },
-  password: { type: String, required: true, validate: passwordValidators}
+    email: { type: String, required: true, unique: true, lowercase: true, validate: emailValidators },
+    username: { type: String, required: true, unique: true, lowercase: true, validate: usernameValidators },
+    password: { type: String, required: true, validate: passwordValidators}
 });
 
 

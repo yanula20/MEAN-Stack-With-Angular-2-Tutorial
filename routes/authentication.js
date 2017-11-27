@@ -4,34 +4,34 @@ module.exports = function (router){
 
 router.post('/register', function (req, res){
 
-	if (!req.body.email) {
+    if (!req.body.email) {
 
-	   res.json({ success: false, message: "You must provide an e-mail!" });
+       res.json({ success: false, message: "You must provide an e-mail!" });
 
-	} else {
+    } else {
 
-	  if (!req.body.username) {
+      if (!req.body.username) {
 
-	  	 res.json({ success: false, message: "You must provide an username!" });
+         res.json({ success: false, message: "You must provide an username!" });
 
-	  } else {
+      } else {
 
-		if (!req.body.password){
+        if (!req.body.password){
 
-		   res.json({ success: false, message: "You must provide an password!" });
+           res.json({ success: false, message: "You must provide an password!" });
 
-		} else {
+        } else {
 
-		  var user = new User({
+          var user = new User({
 
-		  	email: req.body.email.toLowerCase(),
+            email: req.body.email.toLowerCase(),
 
-		  	username: req.body.username.toLowerCase(),
+            username: req.body.username.toLowerCase(),
 
-		  	password: req.body.password
+            password: req.body.password
 
-		  });
-		   user.save( function (err){
+          });
+           user.save( function (err){
             // Check if error occured
             if (err) {
               // Check if error is an error indicating duplicate account

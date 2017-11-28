@@ -13,6 +13,10 @@ export class RegisterComponent implements OnInit {
 
 form: FormGroup;
 
+message;
+
+messageClass;
+
 constructor( 
   	private formBuilder: FormBuilder,
   	private authService: AuthService
@@ -93,13 +97,16 @@ onRegisterSubmit(){
 		password: this.form.get('password').value	
 	}	
 
-	this.authService.registerUser(user).subscribe(function(data){
-
-		console.log(data);
+	this.authService.registerUser(user).subscribe(data => {
+		if (!data.success) {
+		   this.messageClass = 'alert alert-danger';
+		   this.message = data.message;
+		} else {
+		   this.messageClass = 'alert alert-success';
+		   this.message = data.message;
+		}
 	});
 }
-
-
 
 
 ngOnInit() {

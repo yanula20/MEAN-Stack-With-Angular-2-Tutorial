@@ -29,6 +29,7 @@ mongoose.connect(config.uri,
 
 //middleware
 //sending data from ang 4200 to api 8080 while in dev
+//remove cross-origin when deploying
 app.use(cors({ origin: 'http://192.168.13.33:4200' }));
 // parse application/x-www-form-urlencoded - above express!
 app.use(bodyParser.urlencoded({ extended: false }));

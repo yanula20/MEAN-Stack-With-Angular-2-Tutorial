@@ -38,7 +38,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use(express.static(__dirname + '/client/dist/'));
-
+//use authentication.js
 app.use('/authentication', authentication);
 
 app.get('*', function (req, res) {

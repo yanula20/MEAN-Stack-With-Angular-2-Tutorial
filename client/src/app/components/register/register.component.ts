@@ -17,9 +17,20 @@ message;
 
 messageClass;
 
+emailValid;
+
+emailMessage;
+
+usernameValid;
+
+usernameMessage;
+
+processing = false; //default
+
 constructor( 
   	private formBuilder: FormBuilder,
-  	private authService: AuthService
+  	private authService: AuthService,
+  	private router: Router
   ) { 
   	this.createForm();
   }
@@ -51,12 +62,26 @@ createForm(){
  	}, { validator: this.matchingPasswords ('password', 'confirm')}) 
 }
 
+disableForm(){
+	this.form.controls['email'].disable();
+	this.form.controls['username'].disable();
+	this.form.controls['password'].disable();
+	this.form.controls['confirm'].disable();
+}
+
+enableForm(){
+	this.form.controls['email'].enable();
+	this.form.controls['username'].enable();
+	this.form.controls['password'].enable();
+	this.form.controls['confirm'].enable();
+}
+
 matchingPasswords (password, confirm){
 	return (group: FormGroup) => {
 		if (group.controls[password].value === group.controls[confirm].value){
 		 return null;
 		} else {
-			return { 'matchingPasswords': true}
+			return { 'matchingPasswords': true}//error, show error <li>
 		}
 	}
 }
@@ -91,6 +116,9 @@ validatePassword(controls){
 
 onRegisterSubmit(){
 
+	this.processing = true;
+	this.disableForm();
+
 	var user = {
 		email: this.form.get('email').value,
 		username: this.form.get('username').value,
@@ -101,13 +129,43 @@ onRegisterSubmit(){
 		if (!data.success) {
 		   this.messageClass = 'alert alert-danger';
 		   this.message = data.message;
+		   this.processing = false;
+		   this.enableForm();
 		} else {
 		   this.messageClass = 'alert alert-success';
 		   this.message = data.message;
+		   setTimeout(() => {
+		   		this.router.navigate(['/login']);
+		   }, 2000)
 		}
 	});
 }
+//blur
+checkEmail(){
+	this.authService.checkEmail(this.form.get('email').value).subscribe(data => {
+		if (!data.success){
+			this.emailValid = false;
+			this.emailMessage = data.message;
+		} else {
+			this.emailValid = true;
+			this.emailMessage = data.message;
+		}
+	});
 
+}
+//blur
+checkUsername(){
+	this.authService.checkUsername(this.form.get('username').value).subscribe(data => {
+		if (!data.success){
+			this.usernameValid = false;
+			this.usernameMessage = data.message;
+		} else {
+			this.usernameValid = true;
+			this.usernameMessage = data.message;	
+		}
+	});
+
+}
 
 ngOnInit() {
   }

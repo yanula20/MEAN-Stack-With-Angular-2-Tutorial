@@ -6,6 +6,9 @@ import 'rxjs/add/operator/map';
 export class AuthService {
 
 domain = "http://192.168.33.13:8080";
+authToken;
+user;
+
 
   constructor(
 
@@ -31,5 +34,22 @@ domain = "http://192.168.33.13:8080";
   	return this.http.get(this.domain + '/authentication/checkEmail/' + email).map(res => res.json());
   }
 
+  login(user) {
+
+    return this.http.post(this.domain + '/authentication/login', user).map(res => res.json());
+  }
+
+  storeUserData(token, user) {
+    localStorage.setItem('token', token);
+    localStorage.setItem('user', JSON.stringify(user));
+    this.authToken = token;
+    this.user = user;
+  }
+
+
 }
+
+
+
+
 

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HomeComponent } from './components/home/home.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RegisterComponent} from './components/register/register.component';
+import { LoginComponent} from './components/login/login.component';
 
 var appRoutes: Routes = [
   {
@@ -17,9 +18,12 @@ var appRoutes: Routes = [
   	path: 'register',
   	component: RegisterComponent
   },
-  { path: '**', 
-  component: HomeComponent
+  { path: 'login', 
+    component: LoginComponent
   },
+  { path: '**', 
+    component: HomeComponent
+  } 
 ];
 
 @NgModule({

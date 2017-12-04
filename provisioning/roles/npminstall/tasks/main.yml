@@ -52,6 +52,19 @@
     chdir: /vagrant
 
 
+- name: Check whether client angular side folder exists
+  stat:
+    path: /vagrant/client
+  register: clientfolder_result
 
+- name: Install angular2-flash-message for client on angular side
+  become: yes
+  shell: npm install {{item}} --save
+  args:
+    chdir: /vagrant/client
+  when: clientfolder_result.stat.exists == true
+  with_items:
+    - angular2-flash-messages
+    - angular2-jwt
 
 

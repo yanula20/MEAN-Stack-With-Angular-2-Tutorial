@@ -43,6 +43,6 @@
     "express": "4.16.2",
     "express-method-override": "0.0.3",
     "jsonwebtoken": "^7.4.1",
-    "mongoose": "4.13.4"
+    "mongoose": "4.13.6"
   }
 }

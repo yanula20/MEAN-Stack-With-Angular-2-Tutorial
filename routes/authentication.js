@@ -140,15 +140,53 @@ router.post('/login', (req, res) => {
               if (!validPassword) {//failed password comparison test
                 res.json({ success: false, message: "Passwords do not match." });
               } else {
-                var token = jwt.sign({ userId: user._id }, config.secret, { expiresIn: '24'});
+                var token = jwt.sign({ userId: user._id }, config.secret, { expiresIn: '24h'});
                 res.json({ success: true, message: "Success!", token: token, user: {username: user.username } });
               }
             }
           }
         });
       }
+    }  
+});
+
+
+/*middleware uses '.use'
+grab token from the header
+routes that require authorization tokens must go below this middleware
+routes that don't require authorization can go above this middleware */
+
+router.use((req, res, next) => {
+  var token = req.headers['authorization'];
+  if (!token) {
+    res.json({ success: false, message: "No token provided." });
+  } else {
+    jwt.verify(token, config.secret, (err, decoded) => {//decrypt token using secret
+      if (err) {
+        res.json({ success: false, message: "Token invalid: " + err });
+      } else {
+        req.decoded = decoded; //global variable accessed below
+        next();
+      }
+    });
+  }
+});
+
+
+router.get('/profile', (req, res) => {
+  /*res.send(req.decoded);*/
+  /*res.send('test');*/
+  User.findOne({_id: req.decoded.userId }).select('username email').exec((err, user) => {
+    if (err) {
+      res.json({ success: false, message: err });
+    } else {
+      if (!user) {
+        res.json({ success: false, message: "User not found." });
+      } else {
+        res.json({ success: true, user: user });
+      }
     }
-    
+  });
 });
 
   return router; // Return router object to main index.js

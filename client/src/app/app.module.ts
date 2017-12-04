@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -10,6 +11,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AuthService } from './services/auth.service';
 import { LoginComponent } from './components/login/login.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { FlashMessagesModule } from 'angular2-flash-messages';
 
 @NgModule({
   declarations: [
@@ -18,13 +21,17 @@ import { LoginComponent } from './components/login/login.component';
   HomeComponent,
   DashboardComponent,
   RegisterComponent,
-  LoginComponent
+  LoginComponent,
+  ProfileComponent
 ],
 imports: [
   BrowserModule,
   HttpModule,
   AppRoutingModule,
+  FlashMessagesModule.forRoot(),
+  FormsModule,
   ReactiveFormsModule
+  
 ],
   providers: [AuthService],
   bootstrap: [AppComponent]

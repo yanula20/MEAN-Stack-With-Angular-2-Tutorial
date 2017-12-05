@@ -3,3 +3,30 @@ nav.navbar.navbar-default {
 	border-color: #e7e7e7;
 }
 
+/* unvisited link */
+.navbar-default .navbar-nav>li a:link {
+    color: orange;
+}
+
+/* visited link */
+.navbar-default .navbar-nav>li a:visited {
+    color: green;
+}
+
+/* mouse over link */
+.navbar-default .navbar-nav>li a:hover {
+    color: red;
+}
+
+/* selected link */
+.navbar-default .navbar-nav>li a:active {
+    color: purple;
+}
+
+/* unvisited link */
+a.navbar-brand {
+    color: green;
+}
+
+
+

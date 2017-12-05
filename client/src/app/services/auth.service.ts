@@ -57,13 +57,11 @@ options;
   }
 
 
-logout(){
-  console.log('logout fired');
-  this.authToken = null;
-  this.user = null;
-  localStorage.clear();
-  console.log('logout fired');
-}
+  logout(){
+    this.authToken = null;
+    this.user = null;
+    localStorage.clear();
+  }
 
   storeUserData(token, user) {
     localStorage.setItem('token', token);

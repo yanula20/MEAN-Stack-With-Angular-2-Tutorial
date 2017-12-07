@@ -7,7 +7,7 @@ var path = require('path');
 var authentication = require('./routes/authentication')(router);
 var bodyParser = require('body-parser');
 var cors = require('cors');
-
+var blogs = require('./routes/blogs')(router);
 
 mongoose.Promise = global.Promise;
 
@@ -27,28 +27,27 @@ mongoose.connect(config.uri,
 	}
 });
 
-//middleware
-//sending data from ang 4200 to api 8080 while in dev
-//remove cross-origin when deploying
+/*middleware = FROM
+sending data from ang 4200 to api 8080 while in dev
+remove cross-origin when deploying*/
 app.use(cors({ origin: 'http://192.168.13.33:4200' }));
-// parse application/x-www-form-urlencoded - above express!
+
+// parse application/x-www-form-urlencoded - place above express!
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// parse application/json - above express!
+// parse application/json - place above express!
 app.use(bodyParser.json());
-
 app.use(express.static(__dirname + '/client/dist/'));
-//use authentication.js
 app.use('/authentication', authentication);
+app.use('/blogs', blogs);
 
 app.get('*', function (req, res) {
-
   res.sendFile(path.join(__dirname + '/client/dist/index.html'));
 
 });
-
+//TO:
 app.listen(8080, function() {
 
-	console.log('Listening on port 8080');
+	console.log('Listening on port 8080 and sending files to S.P.A. at ' + __dirname + '/client/dist/index.html');
 
 });

@@ -1,8 +1,9 @@
-div.jumbotron.text-center {
-	background-color: #a3c9ea;
-	border-color: #e7e7e7;
+div.jumbotron {
+	background-color: #9b88ef;
+	border-color: black;
 }
 
 div.thumbnail{
-	background-color: #dff0d8
+	background-color: lightblue;
+	border-color: #070707;
 }

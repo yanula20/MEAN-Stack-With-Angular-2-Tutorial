@@ -7,31 +7,18 @@ module.exports = function (router){
 router.post('/register', function (req, res){
 
     if (!req.body.email) {
-
        res.json({ success: false, message: "You must provide an e-mail!" });
-
     } else {
-
       if (!req.body.username) {
-
          res.json({ success: false, message: "You must provide an username!" });
-
       } else {
-
         if (!req.body.password){
-
            res.json({ success: false, message: "You must provide an password!" });
-
         } else {
-
           var user = new User({
-
             email: req.body.email.toLowerCase(),
-
             username: req.body.username.toLowerCase(),
-
             password: req.body.password
-
           });
            user.save( function (err){
             // Check if error occured
@@ -161,11 +148,11 @@ router.use((req, res, next) => {
   if (!token) {
     res.json({ success: false, message: "No token provided." });
   } else {
-    jwt.verify(token, config.secret, (err, decoded) => {//decrypt token using secret
+    jwt.verify(token, config.secret, (err, decoded) => {
       if (err) {
         res.json({ success: false, message: "Token invalid: " + err });
       } else {
-        req.decoded = decoded; //global variable accessed below
+        req.decoded = decoded; 
         next();
       }
     });

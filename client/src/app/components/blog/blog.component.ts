@@ -18,6 +18,7 @@ export class BlogComponent implements OnInit {
   form;
   username;
   processing = false;
+  blogPosts;
 
   constructor(
 
@@ -105,6 +106,7 @@ export class BlogComponent implements OnInit {
   			} else {
   				this.messageClass = 'alert alert-success';
   				this.message = data.message;
+  				this.getAllBlogs();
   				setTimeout(() => {
   					this.newPost = false;
   					console.log('processing');
@@ -124,10 +126,13 @@ export class BlogComponent implements OnInit {
   		window.location.reload();
   	}
 
+  	getAllBlogs() {
+  		this.blogService.getAllBlogs().subscribe(data => { this.blogPosts = data.blogs;});
+  	}
+
   ngOnInit() {
-  	this.authService.getProfile().subscribe(profile => {
-  		this.username = profile.user.username;
-  	});
+  		this.authService.getProfile().subscribe(profile => { this.username = profile.user.username;});
+  		this.getAllBlogs();
   }
 
 }

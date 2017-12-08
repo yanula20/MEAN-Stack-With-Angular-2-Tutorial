@@ -47,6 +47,21 @@ router.post('/newBlog', function (req, res){
 	      }//14
 	  }//11
 });//router.post
+// -1, descending order
+router.get('/allBlogs', function (req,res) {
+
+  Blog.find({}, function(err, blogs) {
+  	if (err) {
+  		res.json({ success: false, message: err});
+  	} else {
+  		if (!blogs) {
+  			res.json({ success: false, message: "No blogs found."});
+  		} else {
+  			res.json({ success: true, blogs: blogs});
+  		  }
+  	  }
+  }).sort({'_id': -1});
+});
 
 return router;
 

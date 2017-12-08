@@ -160,6 +160,7 @@ router.use((req, res, next) => {
 });
 
 
+
 router.get('/profile', (req, res) => {
   /*res.send(req.decoded);*/
   /*res.send('test');*/

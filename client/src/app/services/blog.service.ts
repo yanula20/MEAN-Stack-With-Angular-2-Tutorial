@@ -25,10 +25,15 @@ export class BlogService {
     });
   }
 
-  // Function to create a new blog post
+  // Function to create a new blog post - point to blogs route
   newBlog(blog) {
     this.createAuthenticationHeaders(); // Create headers
     return this.http.post(this.domain + '/blogs/newBlog', blog, this.options).map(res => res.json());
+  }
+
+  getAllBlogs() {
+  	this.createAuthenticationHeaders();
+  	return this.http.get(this.domain + '/blogs/allBlogs', this.options).map(res => res.json());
   }
 
 }

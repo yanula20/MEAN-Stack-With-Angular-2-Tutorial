@@ -42,21 +42,23 @@
 
 
 <div *ngIf="!newPost">
-	<div class="panel panel-primary">
+	<div class="panel panel-primary" *ngFor="let blog of blogPosts">
 		<div class="panel-heading">
-			<h3 class="panel-title">Post Title</h3>	
+			<h3 class="panel-title">{{ blog.title}}</h3>	
 		</div>
 		<div class="panel-body">
-		My money's in that office, right? If she start giving me some bullshit about it ain't there, and we got to go someplace else and get it, I'm gonna shoot you in the head then and there. Then I'm gonna shoot that bitch in the kneecaps, find out where my goddamn money is. She gonna tell me too. Hey, look at me when I'm talking to you, motherfucker. You listen: we go in there, and that nigga Winston or anybody else is in there, you the first motherfucker to get shot. You understand?
+			{{blog.body}}
 		</div>
 		<div class="panel-footer">
-			<strong>Posted by: </strong>dmoore
+			<strong>Posted by: </strong>{{ blog.createdBy }}
 			<br/>
-			<strong>Date: </strong>5 Dec 2017
+			<strong>Date: </strong>{{ blog.createdAt | date: 'MMM dd, yyyy' }}
+			<br/>
 		</div>
-		<div class="panel-footer">
-			<strong>Likes: </strong>25<br/>
-			<strong>Dslikes: </strong>22
+		<div *ngIf="username === blog.createdBy" class="panel-footer">
+			<strong>Likes: </strong> {{ blog.likes }}
+			<br/>
+			<strong>Dslikes: </strong>{{ blog.dislikes }}
 		</div>
 	
 		<a href="#"><button style="{margin-left: 10px}" type="button" name="button" class="btn btn-sm btn-info">Edit</button></a>

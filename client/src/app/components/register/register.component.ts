@@ -25,7 +25,7 @@ usernameValid;
 
 usernameMessage;
 
-processing = false; //default
+processing = false; 
 
 constructor( 
   	private formBuilder: FormBuilder,
@@ -35,7 +35,7 @@ constructor(
   	this.createForm();
   }
 
-
+//fire *ngIf show <li> error - Not satisfiying Validators returns true, which is an error 
 createForm(){
 
  	this.form = this.formBuilder.group({
@@ -81,7 +81,7 @@ matchingPasswords (password, confirm){
 		if (group.controls[password].value === group.controls[confirm].value){
 		 return null;
 		} else {
-			return { 'matchingPasswords': true}//error, show error <li>
+			return { 'matchingPasswords': true}//error, *ngIf = true = show error <li>
 		}
 	}
 }
@@ -91,7 +91,7 @@ validateEmail(controls){
     if(regExp.test(controls.value)){
     	return null; //passes, no errors
     } else {
-    	return {validateEmail: true}//error, show error <li>
+    	return {validateEmail: true}//error, *ngIf = true = show error <li>
     }
 }
 
@@ -101,7 +101,7 @@ validateUsername(controls){
     if(regExp.test(controls.value)){
     	return null; //passes, no errors
     } else {
-    	return {validateUsername: true}//error, show error <li>
+    	return {validateUsername: true}//error, *ngIf = true = show error <li>
     }
 }
 
@@ -140,7 +140,7 @@ onRegisterSubmit(){
 		}
 	});
 }
-//blur
+//blur -- uses authService to check whether email is taken
 checkEmail(){
 	this.authService.checkEmail(this.form.get('email').value).subscribe(data => {
 		if (!data.success){
@@ -153,7 +153,7 @@ checkEmail(){
 	});
 
 }
-//blur
+//blur -- uses authService to check whether username is taken
 checkUsername(){
 	this.authService.checkUsername(this.form.get('username').value).subscribe(data => {
 		if (!data.success){
@@ -164,7 +164,6 @@ checkUsername(){
 			this.usernameMessage = data.message;	
 		}
 	});
-
 }
 
 ngOnInit() {

@@ -1,5 +1,6 @@
 <h1 class="page-header">Blog Feed</h1>
 
+<!-- Feedback Messages -->
 <div class="row show-hide-message" *ngIf="message && newPost">
 	<div [ngClass]="messageClass">
 		{{message}}
@@ -7,10 +8,16 @@
 </div> 
 <br />
 <br />
+<!-- Feedback Messages -->
+
+<!-- New Post and Reload Buttons -->
 <button type="button" name="button" class="btn btn-warning" *ngIf="!newPost" (click)="newBlogForm()">New Post</button>
 <button [disabled]="loadingBlogs" type="button" name="button" class="btn btn-default" *ngIf="!newPost" (click)="reloadBlogs()"><span class="glyphicon glyphicon-repeat"></span>&nbsp;&nbsp;Reload</button>
 <br />
 <br />
+<!-- New Post and Reload Buttons -->
+
+<!-- New Blog Form -->
 <form [formGroup]="form" name="newBlogForm" (submit)="onBlogSubmit()" *ngIf="newPost">
 	<!--Title-->
 	<div class="form-group">
@@ -36,11 +43,18 @@
 			</ul>
 		</div>
 	</div>
-	    <button type="button" name="button" (click)="goBack()" class="btn btn-warning">Go Back</button>
-	    <button [disabled]="processing || (form.controls.dirty && !form.valid)" type="submit" name="button" class="btn btn-success">Submit</button>
+	<!--Body-->
+
+	<!--Go Back and Submit Buttons -->
+	<button type="button" name="button" (click)="goBack()" class="btn btn-warning">Go Back</button>
+	<button [disabled]="processing || (form.controls.dirty && !form.valid)" type="submit" name="button" class="btn btn-success">Submit</button>
+	<!--Go Back and Submit Buttons -->
+
 </form>
+<!-- New Blog Form -->
 
 
+<!--New Post -->
 <div *ngIf="!newPost">
 	<div class="panel panel-primary" *ngFor="let blog of blogPosts">
 		<div class="panel-heading">
@@ -50,10 +64,8 @@
 			{{blog.body}}
 		</div>
 		<div class="panel-footer">
-			<strong>Posted by: </strong>{{ blog.createdBy }}
-			<br/>
-			<strong>Date: </strong>{{ blog.createdAt | date: 'MMM dd, yyyy' }}
-			<br/>
+			<strong>Posted by: </strong>{{ blog.createdBy }}<br/>
+			<strong>Date: </strong>{{ blog.createdAt | date: 'MMM dd, yyyy' }}<br/>
 		</div>
 		<div *ngIf="username === blog.createdBy" class="panel-footer">
 			<strong>Likes: </strong> {{ blog.likes }}
@@ -61,13 +73,12 @@
 			<strong>Dslikes: </strong>{{ blog.dislikes }}
 		</div>
 	
-		<a href="#"><button style="{margin-left: 10px}" type="button" name="button" class="btn btn-sm btn-info">Edit</button></a>
-		<a href="#"><button type="button" name="button" class="btn btn-sm btn-danger">Delete</button></a>
+		<a [routerLink]="['/edit-blog/', blog._id]" *ngIf="username === blog.createdBy"><button style="{margin-left: 10px}" type="button" name="button" class="btn btn-sm btn-info">Edit</button></a>
+		<a [routerLink]="['/delete-blog/', blog._id]" *ngIf="username === blog.createdBy"><button type="button" name="button" class="btn btn-sm btn-danger">Delete</button></a>
+
 		<!--start Likes dropdown-->
 		<div class="dropdown">
-			<button type="button" name="button" class="btn btn-sm btn-success">
-				<span class="glyphicon glyphicon-thumbs-up">&nbsp;</span>Likes: 21
-			</button>
+		<button type="button" name="button" class="btn btn-sm btn-success" *ngIf="username !== blog.createdBy"><span class="glyphicon glyphicon-thumbs-up">&nbsp;</span>Likes: 21</button>
 			<div class="dropdown-content">
 				<a href="#">jblow</a>
 				<a href="#">gettys</a>
@@ -75,11 +86,10 @@
 			</div>
 		</div>
 		<!--end Likes dropdown-->
+
 		<!--start Disikes dropdown-->
 		<div class="dropdown">
-			<button type="button" name="button" class="btn btn-sm btn-warning">
-				<span class="glyphicon glyphicon-thumbs-down">&nbsp;</span>Dislikes: 22
-			</button>
+		<button type="button" name="button" class="btn btn-sm btn-warning" *ngIf="username !== blog.createdBy"><span class="glyphicon glyphicon-thumbs-down">&nbsp;</span>Dislikes: 22</button>
 			<div class="dropdown-content">
 				<a href="#">tashkent</a>
 				<a href="#">yanna</a>
@@ -90,7 +100,7 @@
 
 		<ul class="list-group">
       		<li class="list-group-item">
-      			<button type="button" name="button" class="btn btn-sm btn-danger" (click)="draftComment()">Post Comment</button>
+      			<button type="button" name="button" class="btn btn-sm btn-danger" (click)="draftComment()" *ngIf="username !== blog.createdBy">Post Comment</button>
       			<!--<form>
       				<textarea name="comment" rows="10" cols="30" class="form-control"></textarea>
       				<br/>
@@ -101,4 +111,5 @@
       	</ul>
 	</div>
 </div>
+<!--New Post -->
 

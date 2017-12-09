@@ -17,6 +17,7 @@ import { FlashMessagesModule } from 'angular2-flash-messages';
 import { AuthGuard } from './guards/auth.guard';
 import { NotAuthGuard } from './guards/notAuth.guard';
 import { BlogComponent } from './components/blog/blog.component';
+import { EditBlogComponent } from './components/blog/edit-blog/edit-blog.component';
 
 
 @NgModule({
@@ -28,16 +29,16 @@ import { BlogComponent } from './components/blog/blog.component';
   RegisterComponent,
   LoginComponent,
   ProfileComponent,
-  BlogComponent
+  BlogComponent,
+  EditBlogComponent
 ],
 imports: [
   BrowserModule,
   HttpModule,
-  AppRoutingModule,
-  FlashMessagesModule.forRoot(),
+  ReactiveFormsModule,
   FormsModule,
-  ReactiveFormsModule
-  
+  AppRoutingModule,
+  FlashMessagesModule.forRoot()
 ],
   providers: [AuthService, AuthGuard, NotAuthGuard, BlogService],
   bootstrap: [AppComponent]

@@ -74,7 +74,7 @@ export class BlogComponent implements OnInit {
 
   	reloadBlogs() {
   		this.loadingBlogs = true;
-  		//get all blogs
+  		this.getAllBlogs();
   		setTimeout(() => {
   			this.loadingBlogs = false;
   		}, 4000);	
@@ -118,7 +118,6 @@ export class BlogComponent implements OnInit {
   			 }
   		});
   	}
-
 
 
   	goBack() {

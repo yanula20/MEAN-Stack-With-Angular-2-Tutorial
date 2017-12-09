@@ -3,6 +3,10 @@
 
 }
 
+button.btn.btn-sm.btn-success {
+	margin-left: 16px;
+}
+
 .panel-footer {
 	background-color: white;
 }

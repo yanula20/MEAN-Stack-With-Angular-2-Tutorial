@@ -1,0 +1,25 @@
+div > * {
+	font-size: 15px;
+}
+
+
+div.modal-content{
+	margin-top: 35px;
+}
+
+div.modal-header {
+	background-color: #337ab7;
+	font: white;
+}
+
+button.close{
+	background-color: white;
+}
+
+h4.modal-title{
+	color: white;
+}
+
+.panel-footer {
+	background-color: white;
+}

@@ -196,7 +196,7 @@ module.exports = function (router) {
                   if (user.username !== blog.createdBy) {
                     res.json({
                       success: false,
-                      message: 'You are not authorized to edit this item.',
+                      message: 'You are not authorized to edit this item.'
                     });
                   } else {
                     blog.title = req.body.title;
@@ -205,12 +205,12 @@ module.exports = function (router) {
                       if (err) {
                         res.json({
                           success: false,
-                          message: err,
+                          message: "Something went wrong! Ensure that no special characters are used in the title or the body."
                         });
                       } else {
                         res.json({
                           success: true,
-                          message: 'Blog updates saved!',
+                          message: 'Blog updates saved!'
                         });
                       }
                     });
@@ -295,7 +295,7 @@ module.exports = function (router) {
     if (!req.body.id) {
       res.json({
         success: false,
-        message: 'No blog id was provided.',
+        message: 'No blog id was provided.'
       });
     } else {
       Blog.findOne({
@@ -304,13 +304,13 @@ module.exports = function (router) {
         if (err) {
           res.json({
             success: false,
-            message: 'Blog id is invalid.',
+            message: 'Blog id is invalid.'
           });
         } else {
           if (!blog) {
             res.json({
               success: false,
-              message: 'Blog was not found.',
+              message: 'Blog was not found.'
             });
           } else {
             User.findOne({

@@ -17,7 +17,7 @@ var emailLengthChecker = function (email) {
         return true; // Return as valid e-mail
     }
   }
-};
+};  
 
 // Validate Function to check if valid e-mail format
 var validEmailChecker = function (email) {

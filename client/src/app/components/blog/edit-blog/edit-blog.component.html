@@ -17,7 +17,7 @@
     <ul class="help-block">
       <li *ngIf="form.controls.title.errors?.required && form.controls.title.dirty">This field is required</li>
       <li *ngIf="(form.controls.title.errors?.minlength && form.controls.title.dirty) || (form.controls.title.errors?.maxlength && form.controls.title.dirty)">Minimum characters: 5, Maximum characters: 50</li>
-      <li *ngIf="form.controls.title.errors?.validateTitle && form.controls.title.dirty">may only contain letters, numbers, spaces, hyphens, and apostrophes</li>
+      <li *ngIf="form.controls.title.errors?.validateTitle && form.controls.title.dirty">No special characters.</li>
     </ul>
  </div>
 	<!--Title-->
@@ -28,7 +28,6 @@
         <ul class="help-block">
           <li *ngIf="form.controls.body.errors?.required && form.controls.body.dirty">This field is required</li>
           <li *ngIf="(form.controls.body.errors?.minlength && form.controls.body.dirty) || (form.controls.body.errors?.maxlength && form.controls.title.dirty)">Minimum characters: 5, Maximum characters: 1000</li>
-          <li *ngIf="form.controls.body.errors?.validateTitle && form.controls.body.dirty">Title may only contain letters, numbers, spaces, hyphens, and apostrophes</li>
         </ul>
 		    <a routerLink="['/delete-blog/', blog._id]" ><button [disabled]="processing" type="button" name="button" class="btn btn-danger">Delete</button></a>
 		    <button type="button" name="button" class="btn btn-success" (click)="goBack()" [disabled]="processing" >Go Back</button>

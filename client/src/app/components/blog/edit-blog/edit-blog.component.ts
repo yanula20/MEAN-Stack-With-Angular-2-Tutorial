@@ -45,15 +45,14 @@ export class EditBlogComponent implements OnInit {
         body: ['', Validators.compose([
           Validators.required,
           Validators.minLength(5),
-          Validators.maxLength(1000),
-          this.validateBody
+          Validators.maxLength(1000)
         ])]
       })
     }
 
 
     validateTitle(controls){
-    	var regExp = new RegExp(/^[a-zA-Z0-9 '-]+$/);
+    	var regExp = new RegExp(/^[a-zA-Z0-9\w ]+$/);
         if(regExp.test(controls.value)){
         	return null; //passes, no errors
         } else {
@@ -61,14 +60,7 @@ export class EditBlogComponent implements OnInit {
         }
     }
 
-    validateBody(controls){
-      var regExp = new RegExp(/^[a-zA-Z0-9 '-]+$/);
-        if(regExp.test(controls.value)){
-          return null; //passes, no errors
-        } else {
-          return {validateBody: true}//error, *ngIf = true = show error <li>
-        }
-    }
+  
 
 
   updateBlogSubmit() {

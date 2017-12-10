@@ -16,7 +16,7 @@ export class BlogComponent implements OnInit {
   newPost = false;
   loadingBlogs = false;
   form;
-  username;
+  username;  
   processing = false;
   blogPosts;
 

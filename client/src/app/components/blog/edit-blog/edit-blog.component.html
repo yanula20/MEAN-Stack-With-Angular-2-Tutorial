@@ -9,22 +9,31 @@
 <!-- Custom Success/Error Message -->
 
 <!-- Edit Blog -->
-<form (submit)="updateBlogSubmit()" *ngIf="!loading">
+<form [formGroup]="form" (submit)="updateBlogSubmit()" *ngIf="!loading">
 	<!--Title-->
-	<div class="form-group">
-		<label for="title">Title</label>
-		<input [disabled]="processing" type="text" name="title" placeholder="*Blog Title" class="form-control" [(ngModel)]="blog.title" />
-	</div>
+	<div class="form-contorl">
+	<label for="title">Title</label>
+	<input [disabled]="processing" type="text" name="title" placeholder="*Blog Title" formControlName="title" class="form-control" [(ngModel)]="blog.title" />
+    <ul class="help-block">
+      <li *ngIf="form.controls.title.errors?.required && form.controls.title.dirty">This field is required</li>
+      <li *ngIf="(form.controls.title.errors?.minlength && form.controls.title.dirty) || (form.controls.title.errors?.maxlength && form.controls.title.dirty)">Minimum characters: 5, Maximum characters: 50</li>
+      <li *ngIf="form.controls.title.errors?.validateTitle && form.controls.title.dirty">may only contain letters, numbers, spaces, hyphens, and apostrophes</li>
+    </ul>
+ </div>
 	<!--Title-->
-
 	<!--Body-->
-	<div class="form-group">
+	<div class="form-contorl">
 		<label for="body">Body</label>
-		<textarea type="text" [disabled]="processing" name="body" rows="8" cols="80" placeholder="*Blog Body" class="form-control" [(ngModel)]="blog.body"></textarea>
-		<a routerLink="['/delete-blog/', blog._id]" ><button [disabled]="processing" type="button" name="button" class="btn btn-danger">Delete</button></a>
-		<button type="button" name="button" class="btn btn-success" (click)="goBack()" [disabled]="processing" >Go Back</button>
-		<button type="submit" name="save" class="btn btn-info" [disabled]="processing">Save Changes</button>
-	</div>
+		    <textarea type="text" [disabled]="processing" name="body" rows="8" cols="80" placeholder="*Blog Body" class="form-control" formControlName="body" [(ngModel)]="blog.body"></textarea>
+        <ul class="help-block">
+          <li *ngIf="form.controls.body.errors?.required && form.controls.body.dirty">This field is required</li>
+          <li *ngIf="(form.controls.body.errors?.minlength && form.controls.body.dirty) || (form.controls.body.errors?.maxlength && form.controls.title.dirty)">Minimum characters: 5, Maximum characters: 1000</li>
+          <li *ngIf="form.controls.body.errors?.validateTitle && form.controls.body.dirty">Title may only contain letters, numbers, spaces, hyphens, and apostrophes</li>
+        </ul>
+		    <a routerLink="['/delete-blog/', blog._id]" ><button [disabled]="processing" type="button" name="button" class="btn btn-danger">Delete</button></a>
+		    <button type="button" name="button" class="btn btn-success" (click)="goBack()" [disabled]="processing" >Go Back</button>
+		    <button type="submit" name="save" class="btn btn-info" [disabled]="processing">Save Changes</button>
+  </div>
 	<!--Body-->
 </form>
 

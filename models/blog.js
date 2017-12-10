@@ -1,124 +1,68 @@
-var mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
-var Schema = mongoose.Schema;
+import { Injectable } from '@angular/core';
+import { AuthService } from './auth.service';
+import { Http, Headers, RequestOptions } from '@angular/http';
 
+@Injectable()
+export class BlogService {
 
-var titleLengthChecker = function (title) {
-    if (!title) {
-        return false; 
-    } else {
-    if (title.length < 5 || title.length > 50) {
-        return false; 
-    } else {
-        return true;
-    }
+  options;
+  domain = this.authService.domain;
+
+  constructor(
+    private authService: AuthService,
+    private http: Http
+  ) { }
+
+ 
+  createAuthenticationHeaders() {
+    this.authService.loadToken(); 
+    this.options = new RequestOptions({
+      headers: new Headers({
+        'Content-Type': 'application/json', // Format set to JSON
+        'authorization': this.authService.authToken // Attach token
+      })
+    });
   }
-};
 
-
-var alphaNumbericChecker = function (title) {
-    if (!title) {
-        return false; 
-    } else {
-        var regExp = new RegExp(/^[a-zA-Z0-9 ]+$/);
-        return regExp.test(title); 
-    }
-};
-
-var titleValidators = [
-  
-  {
-    validator: titleLengthChecker,
-    message: 'Title must be at least 5 characters but no more than 50'
-  },
-  {
-    validator: alphaNumbericChecker,
-    message: 'Title must be alphanumeric.'
+ 
+  newBlog(blog) {
+    this.createAuthenticationHeaders(); 
+    return this.http.post(this.domain + '/blogs/newBlog', blog, this.options).map(res => res.json());
   }
-];
 
-var bodyLengthChecker = function(body){
-    if(!body){
-        return false;
-    } else {
-        if(body.length < 5 || body.length > 1000){
-            return false
-        } else{
-            return true;
-        }
-    }
-};
+  getAllBlogs() {
+  	this.createAuthenticationHeaders();
+  	return this.http.get(this.domain + '/blogs/allBlogs', this.options).map(res => res.json());
+  }
 
+  getSingleBlog(id) {
+  	this.createAuthenticationHeaders();
+  	return this.http.get(this.domain + '/blogs//singleBlog/' + id, this.options).map(res => res.json());
+  }
 
-bodyValidators = [
-   {
-    validator: bodyLengthChecker,
-    message: "The body must be between 5 and 1000 characters in length."
-   }
-];
+  editBlog(blog) {
+  	this.createAuthenticationHeaders();
+  	return this.http.put(this.domain + '/blogs/updateBlog', blog, this.options).map(res => res.json());
+  }
 
-
-var commentLengthChecker = function(comment){
-    if(!comment[0]){
-        return false;
-    } else {
-        if (comment[0].length < 1 || comment[0].length > 200){
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-};
+  deleteBlog(id) {
+  	this.createAuthenticationHeaders();
+  	return this.http.delete(this.domain + '/blogs/deleteBlog/' + id, this.options).map(res => res.json());
+  }
 
 
-var commentValidators = [
+  likeBlog(id) {
+  	this.createAuthenticationHeaders();
+    var blogData = { id: id };
+    return this.http.put(this.domain + '/blogs/likeBlog/', blogData, this.options).map(res => res.json());
+  }
 
- {
-    validator: commentLengthChecker,
-    message: 'Comments may not exceed 200 characters in length.'
- }
 
-];
+  dislikeBlog(id) {
+  	this.createAuthenticationHeaders();
+    var blogData = { id: id };
+    return this.http.put(this.domain + '/blogs/dislikeBlog/', blogData, this.options).map(res => res.json());
+  }
 
-var blogSchema = new Schema({
-    title: { 
-        type: String, 
-        required: true,
-        validate: titleValidators
-    },
-    body: { 
-        type: String, 
-        required: true,
-        validate: bodyValidators
-    },
-    createdBy: { 
-        type: String, 
-        required: true
-    },
-    createdAt: { 
-        type: Date, 
-        default: Date.now()
-    },
-    likes: { 
-        type: Number, 
-        default: 0
-    },
-    likedBy: { 
-        type: Array
-    },
-    dislikes: { 
-        type: Number, 
-        default: 0
-    },
-    dislikedBy: { 
-        type: Array
-    },
-    comments: [{
-        comment: { type: String, validate: commentValidators },
-        commentator: { type: String }
-    }]
-});
 
-module.exports = mongoose.model('Blog', blogSchema);
-
+}

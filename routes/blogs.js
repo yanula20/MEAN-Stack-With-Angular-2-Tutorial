@@ -8,27 +8,27 @@ module.exports = function (router) {
     if (!req.body.title) {
       res.json({
         success: false,
-        message: 'Blog title is required.'
+        message: 'Blog title is required.',
       });
     } else {
       if (!req.body.body) {
         res.json({
           success: false,
-          message: "Blog body is required."
+          message: "Blog body is required.",
         });
       } else {
         if (!req.body.createdBy) {
           res.json({
             success: false,
-            message: "CreatedBy is required."
+            message: "CreatedBy is required.",
           });
         } else {
           var blog = new Blog({
             title: req.body.title,
             body: req.body.body,
-            createdBy: req.body.createdBy
+            createdBy: req.body.createdBy,
           });
-          blog.save(function(err) {
+          blog.save(function (err) {
             // Check if error
             if (err) {
               // Check if error is a validation error
@@ -37,32 +37,32 @@ module.exports = function (router) {
                 if (err.errors.title) {
                   res.json({
                     success: false,
-                    message: err.errors.title.message
+                    message: err.errors.title.message,
                   }); // Return error message
                 } else {
                   // Check if validation error is in the body field
                   if (err.errors.body) {
                     res.json({
                       success: false,
-                      message: err.errors.body.message
+                      message: err.errors.body.message,
                     }); // Return error message
                   } else {
                     res.json({
                       success: false,
-                      message: err
+                      message: err,
                     }); // Return general error message
                   }
                 }
               } else {
                 res.json({
                   success: false,
-                  message: err
+                  message: err,
                 }); // Return general error message
               }
             } else {
               res.json({
                 success: true,
-                message: 'Blog saved!'
+                message: 'Blog saved!',
               }); // Return success message
             }
           });
@@ -71,51 +71,51 @@ module.exports = function (router) {
     } //11
   }); //router.post
   // -1, descending order
-  router.get('/allBlogs', function(req, res) {
-    Blog.find({}, function(err, blogs) {
+  router.get('/allBlogs', function (req, res) {
+    Blog.find({}, function (err, blogs) {
       if (err) {
         res.json({
           success: false,
-          message: err
+          message: err,
         });
       } else {
         if (!blogs) {
           res.json({
             success: false,
-            message: "No blogs found."
+            message: 'No blogs found.',
           });
         } else {
           res.json({
             success: true,
-            blogs: blogs
+            blogs: blogs,
           });
         }
       }
     }).sort({
-      '_id': -1
+      '_id': -1,
     });
   });
 
-  router.get('/singleBlog/:id', function(req, res) {
+  router.get('/singleBlog/:id', function (req, res) {
     if (!req.params.id) {
       res.json({
         success: false,
-        message: "No blog id was provided."
+        message: 'No blog id was provided.',
       });
     } else {
       Blog.findOne({
-        _id: req.params.id
+        _id: req.params.id,
       }, (err, blog) => {
         if (err) {
           res.json({
             success: false,
-            message: "Not a valid blog id."
+            message: 'Not a valid blog id.',
           });
         } else {
           if (!blog) {
             res.json({
               success: false,
-              message: "Blog not found."
+              message: 'Blog not found.',
             });
           } else {
             User.findOne({
@@ -196,7 +196,7 @@ module.exports = function (router) {
                   if (user.username !== blog.createdBy) {
                     res.json({
                       success: false,
-                      message: "You are not authorized to edit this item."
+                      message: 'You are not authorized to edit this item.',
                     });
                   } else {
                     blog.title = req.body.title;
@@ -205,12 +205,12 @@ module.exports = function (router) {
                       if (err) {
                         res.json({
                           success: false,
-                          message: err
+                          message: err,
                         });
                       } else {
                         res.json({
                           success: true,
-                          message: "Blog updates saved!"
+                          message: 'Blog updates saved!',
                         });
                       }
                     });
@@ -295,22 +295,22 @@ module.exports = function (router) {
     if (!req.body.id) {
       res.json({
         success: false,
-        message: "No blog id was provided."
+        message: 'No blog id was provided.',
       });
     } else {
       Blog.findOne({
-        _id: req.body.id
+        _id: req.body.id,
       }, (err, blog) => {
         if (err) {
           res.json({
             success: false,
-            message: "Blog id is invalid."
+            message: 'Blog id is invalid.',
           });
         } else {
           if (!blog) {
             res.json({
               success: false,
-              message: "Blog was not found."
+              message: 'Blog was not found.',
             });
           } else {
             User.findOne({
@@ -462,7 +462,7 @@ module.exports = function (router) {
                           if (err) {
                             res.json({
                               success: false,
-                              message: "Something went wrong."
+                              message: 'Something went wrong.'
                             });
                           } else {
                             res.json({

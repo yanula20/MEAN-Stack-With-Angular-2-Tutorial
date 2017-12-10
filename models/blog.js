@@ -107,11 +107,11 @@ var blogSchema = new Schema({
     likedBy: { 
         type: Array
     },
-    Dislikes: { 
+    dislikes: { 
         type: Number, 
         default: 0
     },
-    DislikedBy: { 
+    dislikedBy: { 
         type: Array
     },
     comments: [{

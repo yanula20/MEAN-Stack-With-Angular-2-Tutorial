@@ -5,7 +5,7 @@
 	<div [ngClass]="messageClass">
 		{{message}}
 	</div>
-</div> 
+</div>
 <br />
 <br />
 <!-- Feedback Messages -->
@@ -53,12 +53,11 @@
 </form>
 <!-- New Blog Form -->
 
-
 <!--New Post -->
 <div *ngIf="!newPost">
 	<div class="panel panel-primary" *ngFor="let blog of blogPosts">
 		<div class="panel-heading">
-			<h3 class="panel-title">{{ blog.title}}</h3>	
+			<h3 class="panel-title">{{ blog.title}}</h3>
 		</div>
 		<div class="panel-body">
 			{{blog.body}}
@@ -72,7 +71,7 @@
 			<br/>
 			<strong>Dslikes: </strong>{{ blog.dislikes }}
 		</div>
-	
+
 		<a [routerLink]="['/edit-blog/', blog._id]" *ngIf="username === blog.createdBy"><button style="{margin-left: 10px}" type="button" name="button" class="btn btn-sm btn-info">Edit</button></a>
 		<a [routerLink]="['/delete-blog/', blog._id]" *ngIf="username === blog.createdBy"><button type="button" name="button" class="btn btn-sm btn-danger">Delete</button></a>
 
@@ -112,4 +111,3 @@
 	</div>
 </div>
 <!--New Post -->
-

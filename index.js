@@ -11,43 +11,42 @@ var blogs = require('./routes/blogs')(router);
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect(config.uri, 
+mongoose.connect(config.uri,
 
-	{ useMongoClient: true, 
+  {
+    useMongoClient: true,
 
-	}, function(err){
+  },
+  function (err) {
 
-	if (err) {
+    if (err) {
 
- 		console.log('Could not connect to database: ', err);
-	} else {
+      console.log('Could not connect to database: ', err);
+    } else {
 
-		console.log('Connected to database: ' + config.db);
+      console.log('Connected to database: ' + config.db);
 
-	}
-});
+    }
+  });
 
 /*middleware = FROM
 sending data from ang 4200 to api 8080 while in dev
 remove cross-origin when deploying*/
-app.use(cors({ origin: 'http://192.168.13.33:4200' }));
+app.use(cors({
+  origin: 'http://192.168.13.33:4200'
+}));
 
 // parse application/x-www-form-urlencoded - place above express!
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+  extended: false,
+}));
 
 // parse application/json - place above express!
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/client/dist/'));
 app.use('/authentication', authentication);
 app.use('/blogs', blogs);
-
-app.get('*', function (req, res) {
-  res.sendFile(path.join(__dirname + '/client/dist/index.html'));
-
-});
-//TO:
-app.listen(8080, function() {
-
-	console.log('Listening on port 8080 and sending files to S.P.A. at ' + __dirname + '/client/dist/index.html');
-
+app.get('*', function (req, res) {res.sendFile(path.join(__dirname + '/client/dist/index.html'));});
+app.listen(8080, function () {
+  console.log('Listening on port 8080 and sending files to S.P.A. at ' + __dirname + '/client/dist/index.html');
 });

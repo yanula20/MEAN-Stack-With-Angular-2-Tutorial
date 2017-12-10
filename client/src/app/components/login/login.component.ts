@@ -73,10 +73,8 @@ onLoginSubmit(){
 				}
         	}, 2000);
 		}
-
 	});
 }
-
 
   ngOnInit() {
   	if (this.authGuard.redirectUrl) {

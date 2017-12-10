@@ -55,14 +55,14 @@ export class BlogService {
   likeBlog(id) {
   	this.createAuthenticationHeaders();
     var blogData = { id: id };
-    return this.http.put(this.domain + '/blogs/likeBlog', blogData, this.options).map(res => res.json());
+    return this.http.put(this.domain + '/blogs/likeBlog/', blogData, this.options).map(res => res.json());
   }
 
   
   dislikeBlog(id) {
   	this.createAuthenticationHeaders();
     var blogData = { id: id };
-    return this.http.put(this.domain + '/blogs/dislikeBlog', blogData, this.options).map(res => res.json());
+    return this.http.put(this.domain + '/blogs/dislikeBlog/', blogData, this.options).map(res => res.json());
   }
 
 

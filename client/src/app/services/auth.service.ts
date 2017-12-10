@@ -17,6 +17,10 @@ options;
 
   ) { }
 
+  loadToken() {
+
+    this.authToken = localStorage.getItem('token');
+  }
   
   createAuthenticationHeaders(){
     this.loadToken();
@@ -28,11 +32,6 @@ options;
     });
   }
 
-
-  loadToken() {
-
-    this.authToken = localStorage.getItem('token');
-  }
 
   registerUser(user){
 
@@ -75,6 +74,10 @@ options;
     return this.http.get(this.domain + '/authentication/profile', this.options).map(res => res.json());
   }
 
+    getPublicProfile(username) {
+    this.createAuthenticationHeaders();
+    return this.http.get(this.domain + '/authentication/publicProfile/' + username, this.options).map(res => res.json());
+  }
 
   loggedIn() {
     return tokenNotExpired();

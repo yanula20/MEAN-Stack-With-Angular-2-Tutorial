@@ -1,4 +1,13 @@
 <h2 class="page-header">Profile Page</h2>
+
+<!-- Custom Success/Error Message -->
+<div class="row show-hide-message" *ngIf="message">
+  <div [ngClass]="messageClass">
+    {{ message }}
+  </div>
+</div>
+<!-- Custom Success/Error Message -->
+
 <ul class="list-group">
   <li class="list-group-item">Username: {{ username }}</li>
   <li class="list-group-item">Email: {{ email }}</li>

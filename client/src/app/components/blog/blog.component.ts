@@ -109,7 +109,6 @@ export class BlogComponent implements OnInit {
   				this.getAllBlogs();
   				setTimeout(() => {
   					this.newPost = false;
-  					console.log('processing');
   					this.processing = false;
   					this.message = false;
   					this.form.reset();

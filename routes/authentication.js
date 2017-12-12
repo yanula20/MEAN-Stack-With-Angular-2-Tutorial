@@ -195,5 +195,12 @@ router.get('/publicProfile/:username', (req, res) => {
   }
 });
 
+
+
   return router; // Return router object to main index.js
 }
+
+
+
+
+

@@ -53,7 +53,7 @@ let bodyLengthChecker = (body) => {
     return false; // Return error
   } else {
     // Check length of body
-    if (body.length < 5 || body.length > 1000) {
+    if (body.length < 5 || body.length > 500) {
       return false; // Return error if does not meet length requirement
     } else {
       return true; // Return as valid body
@@ -66,7 +66,7 @@ const bodyValidators = [
   // First Body validator
   {
     validator: bodyLengthChecker,
-    message: 'Body must be more than 5 characters but no more than 1000.'
+    message: 'Body must be more than 5 characters but no more than 500.'
   }
 ];
 

@@ -1,39 +1,33 @@
 <h1 class="page-header">Edit Blog</h1>
 
-<!-- Custom Success/Error Message -->
+<!-- Custom Success/Erro Message -->
 <div class="row show-hide-message" *ngIf="message">
   <div [ngClass]="messageClass">
     {{ message }}
   </div>
 </div>
-<!-- Custom Success/Error Message -->
 
-<!-- Edit Blog -->
-<form [formGroup]="form" (submit)="updateBlogSubmit()" *ngIf="!loading">
-	<!--Title-->
-	<div class="form-contorl">
-	<label for="title">Title</label>
-	<input [disabled]="processing" type="text" name="title" placeholder="*Blog Title" formControlName="title" class="form-control" [(ngModel)]="blog.title" />
-    <ul class="help-block">
-      <li *ngIf="form.controls.title.errors?.required && form.controls.title.dirty">This field is required</li>
-      <li *ngIf="(form.controls.title.errors?.minlength && form.controls.title.dirty) || (form.controls.title.errors?.maxlength && form.controls.title.dirty)">Minimum characters: 5, Maximum characters: 50</li>
-      <li *ngIf="form.controls.title.errors?.validateTitle && form.controls.title.dirty">No special characters.</li>
-    </ul>
- </div>
-	<!--Title-->
-	<!--Body-->
-	<div class="form-contorl">
-		<label for="body">Body</label>
-		    <textarea type="text" [disabled]="processing" name="body" rows="8" cols="80" placeholder="*Blog Body" class="form-control" formControlName="body" [(ngModel)]="blog.body"></textarea>
-        <ul class="help-block">
-          <li *ngIf="form.controls.body.errors?.required && form.controls.body.dirty">This field is required</li>
-          <li *ngIf="(form.controls.body.errors?.minlength && form.controls.body.dirty) || (form.controls.body.errors?.maxlength && form.controls.title.dirty)">Minimum characters: 5, Maximum characters: 1000</li>
-        </ul>
-		    <a routerLink="['/delete-blog/', blog._id]" ><button [disabled]="processing" type="button" name="button" class="btn btn-danger">Delete</button></a>
-		    <button type="button" name="button" class="btn btn-success" (click)="goBack()" [disabled]="processing" >Go Back</button>
-		    <button type="submit" name="save" class="btn btn-info" [disabled]="processing">Save Changes</button>
+<!-- Edit Blog Form -->
+<form (submit)="updateBlogSubmit()" *ngIf="!loading">
+  <!-- Title Field -->
+  <div class="form-group">
+    <label for="title">Title</label>
+    <!-- Title Input -->
+    <input [disabled]="processing" type="text" name="title" placeholder="*Blog Title" class="form-control" [(ngModel)]="blog.title" #title="ngModel" />
   </div>
-	<!--Body-->
-</form>
 
-<!-- Edit Blog -->
+  <!-- Body Field -->
+  <div class="form-group">
+    <label for="body">Body</label>
+    <!-- Body Input -->
+    <textarea [disabled]="processing" name="body" rows="8" cols="80" [(ngModel)]="blog.body" #body="ngModel" class="form-control" placeholder="*Blog Body"></textarea>
+  </div>
+
+  <!-- Delete Button -->
+  <a [routerLink]="['/delete-blog/', blog._id]"><button  [disabled]="processing"  type="button" name="button" class="btn btn-danger">Delete</button></a>
+  <!-- Go Back Button -->
+  <button [disabled]="processing" type="button" name="button" class="btn btn-success" (click)="goBack()">Go Back</button>
+  <!-- Save Changes Button -->
+  <button [disabled]="processing || (!title.dirty && !body.dirty)" type="submit" name="save" class="btn btn-info">Save Changes</button>
+
+</form>

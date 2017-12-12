@@ -12,6 +12,8 @@ export class PublicProfileComponent implements OnInit {
   username;
   email;
   foundProfile;
+  messageClass;
+  message;
   
 
   constructor(

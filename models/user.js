@@ -157,13 +157,11 @@ bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt){
   });
 });
 
-// Methods to compare password to encrypted password upon login
-userSchema.methods.comparePassword = function(password, cb){
-    bcrypt.compare(user.password, this.password, function(err, isMatch) {
 
-        if(err) return (err);
-        cb(null, isMatch);
-    });// Return comparison of login password to password in database (true or false)
+// Methods to compare password to encrypted password upon login
+userSchema.methods.comparePassword = function(password) {
+   var user = this;
+  return bcrypt.compareSync(password, user.password); // Return comparison of login password to password in database (true or false)
 };
 
 // Export Module/Schema

@@ -1,13 +1,14 @@
 /* ===================
    Import Node Modules
 =================== */
-const mongoose = require('mongoose'); // Node Tool for MongoDB
+var mongoose = require('mongoose'); // Node Tool for MongoDB
 mongoose.Promise = global.Promise; // Configure Mongoose Promises
-const Schema = mongoose.Schema; // Import Schema from Mongoose
-const bcrypt = require('bcrypt-nodejs'); // A native JS bcrypt library for NodeJS
+var Schema = mongoose.Schema; // Import Schema from Mongoose
+var bcrypt = require('bcrypt-nodejs'); // A native JS bcrypt library for NodeJS
+SALT_WORK_FACTOR = 10;
 
 // Validate Function to check e-mail length
-let emailLengthChecker = (email) => {
+var emailLengthChecker = (email) => {
   // Check if e-mail exists
   if (!email) {
     return false; // Return error
@@ -22,19 +23,19 @@ let emailLengthChecker = (email) => {
 };
 
 // Validate Function to check if valid e-mail format
-let validEmailChecker = (email) => {
+var validEmailChecker = (email) => {
   // Check if e-mail exists
   if (!email) {
     return false; // Return error
   } else {
     // Regular expression to test for a valid e-mail
-    const regExp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+    var regExp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
     return regExp.test(email); // Return regular expression test results (true or false)
   }
 };
 
 // Array of Email Validators
-const emailValidators = [
+var emailValidators = [
   // First Email Validator
   {
     validator: emailLengthChecker,
@@ -48,7 +49,7 @@ const emailValidators = [
 ];
 
 // Validate Function to check username length
-let usernameLengthChecker = (username) => {
+var usernameLengthChecker = (username) => {
   // Check if username exists
   if (!username) {
     return false; // Return error
@@ -63,19 +64,19 @@ let usernameLengthChecker = (username) => {
 };
 
 // Validate Function to check if valid username format
-let validUsername = (username) => {
+var validUsername = (username) => {
   // Check if username exists
   if (!username) {
     return false; // Return error
   } else {
     // Regular expression to test if username format is valid
-    const regExp = new RegExp(/^[a-zA-Z0-9]+$/);
+    var regExp = new RegExp(/^[a-zA-Z0-9]+$/);
     return regExp.test(username); // Return regular expression test result (true or false)
   }
 };
 
 // Array of Username validators
-const usernameValidators = [
+var usernameValidators = [
   // First Username validator
   {
     validator: usernameLengthChecker,
@@ -89,7 +90,7 @@ const usernameValidators = [
 ];
 
 // Validate Function to check password length
-let passwordLengthChecker = (password) => {
+var passwordLengthChecker = (password) => {
   // Check if password exists
   if (!password) {
     return false; // Return error
@@ -104,19 +105,19 @@ let passwordLengthChecker = (password) => {
 };
 
 // Validate Function to check if valid password format
-let validPassword = (password) => {
+var validPassword = (password) => {
   // Check if password exists
   if (!password) {
     return false; // Return error
   } else {
     // Regular Expression to test if password is valid format
-    const regExp = new RegExp(/^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[\d])(?=.*?[\W]).{8,35}$/);
+    var regExp = new RegExp(/^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[\d])(?=.*?[\W]).{8,35}$/);
     return regExp.test(password); // Return regular expression test result (true or false)
   }
 };
 
 // Array of Password validators
-const passwordValidators = [
+var passwordValidators = [
   // First password validator
   {
     validator: passwordLengthChecker,
@@ -130,29 +131,39 @@ const passwordValidators = [
 ];
 
 // User Model Definition
-const userSchema = new Schema({
+var userSchema = new Schema({
   email: { type: String, required: true, unique: true, lowercase: true, validate: emailValidators },
   username: { type: String, required: true, unique: true, lowercase: true, validate: usernameValidators },
   password: { type: String, required: true, validate: passwordValidators }
 });
 
 // Schema Middleware to Encrypt Password
-userSchema.pre('save', function(next) {
-  // Ensure password is new or modified before applying encryption
-  if (!this.isModified('password'))
-    return next();
+userSchema.pre('save', function(next){
+    var user = this;
+    // Ensure password is new or modified before applying encryption
+    if (!user.isModified('password')) return next();
 
   // Apply encryption
-  bcrypt.hash(this.password, null, null, (err, hash) => {
-    if (err) return next(err); // Ensure no errors
-    this.password = hash; // Apply encryption to password
-    next(); // Exit middleware
+ // generate a salt
+bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt){
+      if (err) return next(err);
+
+       // Apply encryption
+      bcrypt.hash(user.password, salt, null, function(err, hash){
+          if (err) return next(err); // Ensure no errors
+          user.password = hash; // Apply encryption to password
+          next(); // Exit middleware
+      });
   });
 });
 
 // Methods to compare password to encrypted password upon login
-userSchema.methods.comparePassword = function(password) {
-  return bcrypt.compareSync(password, this.password); // Return comparison of login password to password in database (true or false)
+userSchema.methods.comparePassword = function(password, cb){
+    bcrypt.compare(user.password, this.password, function(err, isMatch) {
+
+        if(err) return (err);
+        cb(null, isMatch);
+    });// Return comparison of login password to password in database (true or false)
 };
 
 // Export Module/Schema

@@ -27,17 +27,17 @@ router.post('/register', function (req, res){
               if (err.code === 11000) {
                 res.json({ success: false, message: 'Username or e-mail already exists' }); // Return error
               } else {
-                // Check if error is a validation rror
+                // Check if error is a validation error in user model
                 if (err.errors) {
                   // Check if validation error is in the email field
                   if (err.errors.email) {
                     res.json({ success: false, message: err.errors.email.message }); // Return error
                   } else {
-                    // Check if validation error is in the username field
+                    // Check if validation error is in the username field in user model
                     if (err.errors.username) {
                       res.json({ success: false, message: err.errors.username.message }); // Return error
                     } else {
-                      // Check if validation error is in the password field
+                      // Check if validation error is in the password field in user model
                       if (err.errors.password) {
                         res.json({ success: false, message: err.errors.password.message }); // Return error
                       } else {

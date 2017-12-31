@@ -34,7 +34,7 @@ var validEmailChecker = (email) => {
   }
 };
 
-// Array of Email Validators
+// Array of Email Validators - falsey fires
 var emailValidators = [
   // First Email Validator
   {
@@ -75,7 +75,7 @@ var validUsername = (username) => {
   }
 };
 
-// Array of Username validators
+// Array of Username validators - falsey fires
 var usernameValidators = [
   // First Username validator
   {
@@ -116,7 +116,7 @@ var validPassword = (password) => {
   }
 };
 
-// Array of Password validators
+// Array of Password validators - falsey fires
 var passwordValidators = [
   // First password validator
   {

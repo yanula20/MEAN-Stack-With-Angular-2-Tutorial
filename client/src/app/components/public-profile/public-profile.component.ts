@@ -34,7 +34,7 @@ export class PublicProfileComponent implements OnInit {
     		this.messageClass = "alert alert-success";
     		this.message = data.message;
     		this.username = data.user.username; 
-        	this.email = data.user.email; 
+        this.email = data.user.email; 
     	}
           
     });

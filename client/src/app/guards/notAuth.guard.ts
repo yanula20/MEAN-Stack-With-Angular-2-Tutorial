@@ -11,7 +11,7 @@ export class NotAuthGuard implements CanActivate {
   ) { }
 
   canActivate() {
-    if (this.authService.loggedIn()) { //return tokenNotExpired(); treat user as if not logged in
+    if (this.authService.loggedIn()) { 
         this.router.navigate(['/home']);
     	  return false; 
     } else {

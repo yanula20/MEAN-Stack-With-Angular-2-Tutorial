@@ -11,3 +11,7 @@
 - name: Error msg Corrections | Broken apt-get
   become: yes
   shell: sh -c "apt-get update -y; apt-get dist- -y; apt-get autoremove -y; apt-get autoclean -y"
+
+- name: Upgrade the installed packages to newest versions
+  become: yes
+  shell: sh -c "apt-get upgrade -v -y"

@@ -34,7 +34,7 @@ var validEmailChecker = (email) => {
   }
 };
 
-// Array of Email Validators - falsey fires
+// Array of Email Validators - falsey error fires
 var emailValidators = [
   // First Email Validator
   {

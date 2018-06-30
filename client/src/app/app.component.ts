@@ -15,5 +15,5 @@ class object also contains two-way binding properties with
 component.html; data can be accessible in both directions
 */
 export class AppComponent {
-  title = 'Hello World from Angular 2!';
+  
 }

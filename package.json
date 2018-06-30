@@ -7,7 +7,7 @@
     "start": "node index.js",
     "build": "cd client && ng build --prod --env=prod",
     "dev": "echo 'run dev' & npm start",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "snyk test",
     "nodemon": "./node_modules/nodemon/bin/nodemon.js --config nodemon.json --exec npm run dev "
   },
   "repository": {
@@ -24,25 +24,29 @@
   "author": "Don Moore",
   "license": "ISC",
   "devDependencies": {
-    "@angular/cli": "^1.5.2",
-    "@angular/compiler": "^4.4.6",
-    "@angular/compiler-cli": "^4.4.6",
-    "dependency-check": "^2.9.1",
+    "@angular/cli": "^1.7.4",
+    "@angular/compiler": "^4.4.7",
+    "@angular/compiler-cli": "^4.4.7",
+    "dependency-check": "^2.10.1",
     "npm-install-peers": "^1.2.0",
-    "rxjs": "^5.5.2",
-    "typescript": "^2.6.1"
+    "rxjs": "^5.5.11",
+    "typescript": "^2.9.2",
+    "zone.js": "^0.8.26",
+    "snyk": "^1.88.0"
   },
   "bugs": {
     "url": []
   },
   "homepage": "https://github.com/yanula20/MEAN-Stack-With-Angular-2-Tutorial#readme",
   "dependencies": {
+    "@angular/core": "^4.4.7",
     "bcrypt-nodejs": "0.0.3",
-    "body-parser": "1.18.2",
+    "body-parser": "1.18.3",
     "cors": "^2.8.3",
-    "express": "4.16.2",
+    "express": "4.16.3",
     "express-method-override": "0.0.3",
-    "jsonwebtoken": "^7.4.1",
-    "mongoose": "4.13.6"
+    "jsonwebtoken": "^7.4.3",
+    "mongoose": "5.1.5",
+    "qs": "^6.5.2"
   }
 }

@@ -20,7 +20,7 @@ Vagrant.configure(2) do |config|
         web01.vm.provision "shell", inline: <<-SHELL 
             sudo apt-get install software-properties-common -y
             sudo apt-add-repository ppa:ansible/ansible -y
-            sudo apt-get install ansible@latest -y
+            sudo apt-get install ansible -y
             sudo apt-get update -y
             sudo yes | apt-get install -f
         SHELL

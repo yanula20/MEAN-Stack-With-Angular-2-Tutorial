@@ -13,10 +13,10 @@ mongoose.Promise = global.Promise;
 
 mongoose.connect(config.uri,
 
-  {
-    useMongoClient: true,
+  // {
+  //   useMongoClient: true,
 
-  },
+  // },
   function (err) {
 
     if (err) {
@@ -25,6 +25,7 @@ mongoose.connect(config.uri,
     } else {
 
       console.log('Connected to database: ' + config.db);
+      //console.log(config.secret);
 
     }
   });
@@ -41,7 +42,7 @@ app.use(bodyParser.urlencoded({
   extended: false,
 }));
 
-// parse application/json - place above express!
+// parse application/json - req.body.email, req.body.username, place above express!
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/client/dist/'));
 app.use('/authentication', authentication);

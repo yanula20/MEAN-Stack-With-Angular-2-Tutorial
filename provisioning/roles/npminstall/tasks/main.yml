@@ -15,14 +15,7 @@
 
 - name: Running npm install peer Dependencies
   become: yes
-  shell: "npm install npm-install-peers  --save"
-  args:
-    chdir: /vagrant
-
-
-- name: Running npm install peer Dev Dependencies
-  become: yes
-  shell: "npm install npm-install-peers --save-exact --save-dev"
+  shell: "npm install -g npm-install-peers"
   args:
     chdir: /vagrant
 
@@ -40,26 +33,34 @@
 
 - name: Running npm install Dev Dependencies
   become: yes
-  shell: "npm install npm-install-peers --save-dev"
+  shell: "npm install {{item}} --save-dev"
   with_items:
-  - \@angular/cli@^1.5.2
-  - \@angular/compiler@^4.4.6
-  - \@angular/compiler-cli@^4.4.6
-  - \@angular/core@4.4.6
-  - rxjs@^5.5.2
-  - typescript@^2.5.3
+  - \@angular/cli@^1.*
+  - \@angular/core@^4.*
+  - \@angular/compiler@^4.*
+  - \@angular/compiler-cli@^4.*
+  - \@angular/core@4.*
+  - rxjs@^5.*
+  - typescript@^2.*
+  - zone.js@^0.*
   args:
     chdir: /vagrant
 
+
+- name: Running npm install peer Dev Dependencies
+  become: yes
+  shell: "npm install npm-install-peers --save-dev"
+  args:
+    chdir: /vagrant
 
 - name: Check whether client angular side folder exists
   stat:
     path: /vagrant/client
   register: clientfolder_result
 
-- name: Install angular2-flash-message for client on angular side
+- name: Install angular2-flash-message and jwt web tokent for client on angular side
   become: yes
-  shell: npm install {{item}} --save
+  shell: "npm install {{item}}@latest --save"
   args:
     chdir: /vagrant/client
   when: clientfolder_result.stat.exists == true

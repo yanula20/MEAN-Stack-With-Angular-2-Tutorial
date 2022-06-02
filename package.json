@@ -39,7 +39,7 @@
   },
   "homepage": "https://github.com/yanula20/MEAN-Stack-With-Angular-2-Tutorial#readme",
   "dependencies": {
-    "@angular/core": "^4.4.7",
+    "@angular/core": "^11.0.5",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "1.18.3",
     "cors": "^2.8.3",

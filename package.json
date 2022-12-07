@@ -47,6 +47,6 @@
     "express-method-override": "0.0.3",
     "jsonwebtoken": "^7.4.3",
     "mongoose": "5.1.5",
-    "qs": "^6.5.2"
+    "qs": "^6.5.3"
   }
 }

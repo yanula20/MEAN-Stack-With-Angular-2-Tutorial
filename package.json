@@ -24,7 +24,7 @@
   "author": "Don Moore",
   "license": "ISC",
   "devDependencies": {
-    "@angular/cli": "^1.7.4",
+    "@angular/cli": "^15.0.4",
     "@angular/compiler": "^4.4.7",
     "@angular/compiler-cli": "^4.4.7",
     "dependency-check": "^2.10.1",
